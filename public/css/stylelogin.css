@@ -1,0 +1,18 @@
+.changebkg{
+    background-color: #E5FAFA;
+}
+
+nav{
+    background-color: #08E8DE;
+}
+
+.login{
+    width: 350px;
+    height: 300px;
+    text-align: center;
+    margin-left: 37%;
+    margin-top: 15%;
+    padding-top: 2%;
+    background-color: white;
+    border-radius: 15px;
+}
