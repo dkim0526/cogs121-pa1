@@ -5,7 +5,7 @@ const http = require("http").createServer(app);
 // const io = require("socket.io")(http);
 const path = require("path");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo/e5")(session);
 
 var mongoose = require("mongoose");
 var handlebars = require("express-handlebars");
