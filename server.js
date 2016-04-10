@@ -7,11 +7,20 @@ const path = require("path");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
+var mongoose = require("mongoose");
+var handlebars = require("express-handlebars");
+
+var parser = {
+    body: require("body-parser")
+};
+
 require("dotenv").load();
 var models = require("./models");
 var db = mongoose.connection;
 
-var router = { /* TODO */};
+var router = {
+	index: require("./routes/index")
+ };
 
 var parser = {
     body: require("body-parser"),
@@ -21,7 +30,13 @@ var parser = {
 var strategy = { /* TODO */ };
 
 // Database Connection
-/* TODO */
+var db = mongoose.connection;
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/cogs121');
+db.on('error', console.error.bind(console, 'Mongo DB Connection Error:'));
+db.once('open', function(callback) {
+    console.log("Database connected successfully.");
+});
+
 
 // session middleware
 var session_middleware = session({
@@ -44,15 +59,15 @@ app.use(parser.body.json());
 app.use(require('method-override')());
 app.use(session_middleware);
 /* TODO: Passport Middleware Here*/
-
+	
 /* TODO: Use Twitter Strategy for Passport here */
 
 /* TODO: Passport serialization here */
 
 // Routes
 /* TODO: Routes for OAuth using Passport */
-// app.get("/", router.index.view);
-// More routes here if needed
+app.get("/", router.index.view);
+//More routes here if needed
 
 // io.use(function(socket, next) {
 //     session_middleware(socket.request, {}, next);
