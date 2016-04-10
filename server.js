@@ -4,12 +4,14 @@ const app = express();
 const http = require("http");
 const io = require("socket.io")(http);
 const path = require("path");
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+var session = require("express-session");
+const MongoStore = require("connect-mongo/es5")(session);
 
 var mongoose = require("mongoose");
 var passport = require("passport");
 var handlebars = require("express-handlebars");
+
+console.log("LOOP THRU1");
 
 var parser = {
     body: require("body-parser")
@@ -18,7 +20,8 @@ var parser = {
 require("dotenv").load();
 
 app.use(passport.initialize());
-app.use(passport.session());
+console.log("LOOP THRU2");
+
 
 var models = require("./models");
 var db = mongoose.connection;
@@ -43,9 +46,10 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/cogs121');
 db.on('error', console.error.bind(console, 'Mongo DB Connection Error:'));
 db.once('open', function(callback) {
     console.log("Database connected successfully.");
+    console.log("LOOP THRU3");
 });
 
-
+var SESSION_SECRET = '**Random string**' ;
 // session middleware
 var session_middleware = session({
     key: "session",
@@ -54,6 +58,9 @@ var session_middleware = session({
     resave: true,
     store: new MongoStore({ mongooseConnection: db })
 });
+
+app.use(passport.session());
+console.log("LOOP THRU4");
 
 // Middleware
 app.set("port", process.env.PORT || 3000);
@@ -64,12 +71,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(parser.cookie());
 app.use(parser.body.urlencoded({ extended: true }));
 app.use(parser.body.json());
+
+app.use(session({
+   secret: 'keyboard cat',
+   saveUninitialized: true,
+   resave: true
+}));
+
 app.use(require('method-override')());
 app.use(session_middleware);
 /* TODO: Passport Middleware Here*/
 
-
-
+ 
 /* TODO: Use Facebook Strategy for Passport here */
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
@@ -85,6 +98,7 @@ passport.use(new FacebookStrategy({
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'));
+console.log("LOOP THRU8");
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
