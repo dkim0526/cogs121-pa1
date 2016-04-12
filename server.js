@@ -37,8 +37,6 @@ var parser = {
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var FACEBOOK_APP_ID = "1580647242250169";
-var FACEBOOK_APP_SECRET = "b85c97639e0c504bf42e450456f894b6";
 
 // Database Connection
 var db = mongoose.connection;
@@ -85,27 +83,54 @@ app.use(session_middleware);
  
 /* TODO: Use Facebook Strategy for Passport here */
 passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
+  function(accessToken, refreshToken, profile, done) {
+    models.User.findOne({ facebookId: profile.id }, function (err, user) {
+      if(err)
+        return done(err);
+      if(!user){
+        var newUser = new models.User({
+          facebookID: profile.id,
+          token: accessToken,
+          username: profile.givenName + " " + profile.middleName + " " + profile.familyName,
+          displayName: profile.displayName,
+          //is photo profile.value??
+          photo: profile.value
+        });
+        newUser.save(function(err){
+          if(err)
+            return handleError(err);
+        });
+        return done(null, profile);
+      } else{
+        user.facebookID = profile.id;
+        user.displayName = profile.displayName;
+        //is token accessToken or refreshToken?? Do I need to update username??
+        user.token = accessToken;
+        user.username = profile.givenName + " " + profile.middleName + " " + profile.familyName;
+        user.photo = profile.value;
+        user.save();
+        process.nextTick(function(){
+          return done(null, user);
+        });
+      }
     });
   }
 ));
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
+
+//app.get('/auth/facebook',passport.authenticate('facebook'));
 console.log("LOOP THRU8");
 
-app.get('/auth/facebook/callback',
+/*app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
-  });
+  }); */
 
 /* TODO: Passport serialization here */
 passport.serializeUser(function(user, done) {
@@ -118,6 +143,14 @@ passport.deserializeUser(function(user, done) {
 // Routes
 /* TODO: Routes for OAuth using Passport */
 app.get("/", router.index.view);
+app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/");
+});
 // POST method route
 //app.post("/message", router.email.send);
 
