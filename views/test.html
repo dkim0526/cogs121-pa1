@@ -18,27 +18,31 @@
 
 <body>
     <nav>
-        <img src="/img/logowname.png" width="200px" style="margin-left:40%">
+        <img src="/img/logo.png" width="200px" style="margin-left:40%">
         <a href="/" class="pull-right btn" id="logout"><p style="font-size:19px">Logout</p></a>
     </nav>
     <div class="wrapper">
     <div class="container input_question">
-        <div class="profile pull-left">
-            <img src="http://i.imgur.com/vNlsRbF.jpg" class="profile_pic"/>
-        </div>
-        
-        <textarea id="question_textarea" placeholder="Type question here..."></textarea>
-        <br/>
-        <div id="new_question_options">
-            <label for="category_dropdown">Category:</label>
-            <select id="category_dropdown">
-                <option>Math</option>
-                <option>Computer Science</option>
-                <option>English</option>
-                <option>Other</option>
-            </select>
-            <a class="btn btn-custom pull-right">Post</a>
-        </div>
+        <form id="question_form" action="/message" method="post">
+            <input type="hidden" value="{{username}}" name="username"/>
+            <input type="hidden" value="{{picture}}" name="picture"/>
+            <div class="profile pull-left">
+                <img src="http://i.imgur.com/vNlsRbF.jpg" class="profile_pic"/>
+            </div>
+            
+            <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form"></textarea>
+            <br/>
+            <div id="new_question_options">
+                <label for="category_dropdown">Category:</label>
+                <select id="category_dropdown" name="category" form="question_form">
+                    <option>Math</option>
+                    <option>Computer Science</option>
+                    <option>English</option>
+                    <option>Other</option>
+                </select>
+                <input type="submit" class="btn btn-custom pull-right" value="Post">
+            </div>
+        </form>
 
     </div>
     <hr/>
@@ -63,20 +67,31 @@
                <p>{{username}} asked:</p>
                 <h4>{{question}}</h4>
                 <div>
-                    &nbsp;
-                    <a class="btn btn-default pull-right">Answer</a>
+                    <form class="input_answer" id="answer_form" method="post" action="/answer">
+                        <input type="hidden" value="{{username}}" name="username"/>
+                        <input type="hidden" value="{{picture}}" name="picture"/>
+                        <input value="{{id}}" name="questionid" type="hidden"/>
+                        <textarea class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
+                        <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
+                    </form>    
+                   
                 </div>     
-                <br/>       
+                <br/>  
+
                 <div class="answer_section">
                     <ul class="list-unstyled">
                     {{#each answers}}
                         <li class="answer">
                             <div class="pull-right">
-                                <a class="vote">^</a>
-                                <br/>
-                                <label>{{votes}}</label>
-                                <br/>
-                                <a class="vote">v</a>
+                                <form class="input_answer" id="vote_up_form" method="post" action="/vote">
+                                    <button type="submit" class="btn vote vote_up" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
+                                    <br/>
+                                    <label>{{votes}}</label>
+                                    <input type="hidden" id="vote_{{id}}" value="{{votes}}" name="vote">
+                                    <input type="hidden" value="{{id}}" name="answerid" form="vote_up_form">
+                                    <br/>
+                                    <button class="btn vote vote_down" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+                                </form>
                             </div>
                             <div class="profile pull-left">
                                 <img class="profile_pic" src="{{image}}"/>
@@ -105,6 +120,35 @@
         }
     });
 </script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1580647242250169',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+    $(".vote_up").click(function(event){
+        var id = event.target.id.split("_")[1];
+        $("#vote_" + id).val(1 + Number($("#vote_" + id).val()));
+
+    });
+    $(".vote_down").click(function(){
+        var id = event.target.id.split("_")[1];
+        $("#vote_" + id).val(Number($("#vote_" + id).val()) -1);
+    });
+</script>
+
 </body>
 
 </html>

@@ -40,7 +40,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 // Database Connection
 var db = mongoose.connection;
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/cogs121');
+mongoose.connect('mongodb://127.0.0.1/cogs121' || process.env.MONGOLAB_URI );
 db.on('error', console.error.bind(console, 'Mongo DB Connection Error:'));
 db.once('open', function(callback) {
     console.log("Database connected successfully.");
@@ -153,6 +153,9 @@ app.get("/logout", function(req, res){
 });
 
 app.get("/home", router.index.home);
+app.post("/message", router.index.send);
+app.post("/answer", router.index.answer);
+app.post("/vote", router.index.vote);
 // POST method route
 //app.post("/message", router.email.send);
 
