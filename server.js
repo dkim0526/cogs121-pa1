@@ -145,7 +145,7 @@ passport.deserializeUser(function(user, done) {
 app.get("/", router.index.view);
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
+  passport.authenticate('facebook', { successRedirect: '/home',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
   req.logout();
