@@ -55,67 +55,43 @@
         <a class="btn btn-default" id="search_button">Search</a>
     </div>
     <ul class="list-unstyled" id="question_section">
-        <li class="math container question">
-            <div class="profile pull-left">
-                <img class="profile_pic" src="http://i.imgur.com/vNlsRbF.jpg"/>
-            </div>
-           <p>username asked:</p>
-            <h4>What is 2 + 2?</h4>
-            <div>
-                &nbsp;
-                <a class="btn btn-default pull-right">Answer</a>
-            </div>     
-            <br/>       
-            <div class="answer_section">
-                <ul class="list-unstyled">
-                    <li class="answer">
-                        <div class="pull-right">
-                            <a class="vote">^</a>
-                            <br/>
-                            <label>0</label>
-                            <br/>
-                            <a class="vote">v</a>
-                        </div>
-                        <div class="profile pull-left">
-                            <img class="profile_pic" src="http://cdn.theatlantic.com/assets/media/img/mt/2016/01/superman/lead_960.jpg?1454104448"/>
-                        </div>
-                        <p>username said:</p>
-                        <h5>4</h5>
-                    </li>
-                    <li class="answer">
-                        <div class="pull-right">
-                            <a class="vote">^</a>
-                            <br/>
-                            <label>0</label>
-                            <br/>
-                            <a class="vote">v</a>
-                        </div>
-                        <div class="profile pull-left">
-                            <img class="profile_pic" src="http://cdn.theatlantic.com/assets/media/img/mt/2016/01/superman/lead_960.jpg?1454104448"/>
-                        </div>
-                        <p>username said:</p>
-                        <h5>4</h5>
-                    </li>
-                </ul>
-            </div>
-        </li>
+        {{#each questions}}    
+            <li class="{{subject}} container question">
+                <div class="profile pull-left">
+                    <img class="profile_pic" src="{{image}}"/>
+                </div>
+               <p>{{username}} asked:</p>
+                <h4>{{question}}</h4>
+                <div>
+                    &nbsp;
+                    <a class="btn btn-default pull-right">Answer</a>
+                </div>     
+                <br/>       
+                <div class="answer_section">
+                    <ul class="list-unstyled">
+                    {{#each answers}}
+                        <li class="answer">
+                            <div class="pull-right">
+                                <a class="vote">^</a>
+                                <br/>
+                                <label>{{votes}}</label>
+                                <br/>
+                                <a class="vote">v</a>
+                            </div>
+                            <div class="profile pull-left">
+                                <img class="profile_pic" src="{{image}}"/>
+                            </div>
+                            <p>{{username}} said:</p>
+                            <h5>4</h5>
+                        </li>
+                    {{else}}No answers yet.
+                    {{/each}}
+                    </ul>
+                </div>
+            </li>
 
-        <li class="english container question">
-            <div class="profile pull-left">
-                <img class="profile_pic" src="http://i.imgur.com/vNlsRbF.jpg"/>
-            </div>
-           <p>username asked:</p>
-            <h4>Who was Shakespeare?</h4>
-            <div>
-                &nbsp;
-                <a class="btn btn-default pull-right">Answer</a>
-            </div>     
-            <br/>       
-            <div class="answer_section">
-                <ul class="list-unstyled">
-                </ul>
-            </div>
-        </li>
+        {{else}}<h4>No questions found</h4>
+        {{/each}}
     </ul>
 </div>
 <script src="https://code.jquery.com/jquery.js"></script>
