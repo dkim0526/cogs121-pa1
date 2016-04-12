@@ -13,3 +13,8 @@ exports.view = function(req, res) {
     res.render("index", data);
 
 };
+
+exports.home = function(req, res){
+    var data = {data: []};
+    res.render("test", data);
+}

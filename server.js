@@ -151,6 +151,8 @@ app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
 });
+
+app.get("/home", router.index.home);
 // POST method route
 //app.post("/message", router.email.send);
 
