@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <img src="/img/"/>
+        <a href="/" class="pull-right btn" id="logout">Logout</a>
+    </nav>
+    <div class="wrapper">
+    <div class="container input_question">
+        <div class="profile pull-left">
+            <img src="http://i.imgur.com/vNlsRbF.jpg" class="profile_pic"/>
+        </div>
+        
+        <textarea id="question_textarea" placeholder="Type question here..."></textarea>
+        <br/>
+        <div id="new_question_options">
+            <label for="category_dropdown">Category:</label>
+            <select id="category_dropdown">
+                <option>Math</option>
+                <option>Computer Science</option>
+                <option>English</option>
+                <option>Other</option>
+            </select>
+            <a class="btn btn-custom pull-right">Post</a>
+        </div>
+
+    </div>
+    <hr/>
+    <div id="search_area" class="text-center">
+        <label>Search for:</label>
+        <select id="category_search">
+            <option selected>View All</option>
+            <option>Math</option>
+            <option>Computer Science</option>
+            <option>English</option>
+            <option>Other</option>
+        </select>
+        <input placeholder="Enter keywords..."/>
+        <a class="btn btn-default" id="search_button">Search</a>
+    </div>
+    <ul class="list-unstyled" id="question_section">
+        <li class="math container question">
+            <div class="profile pull-left">
+                <img class="profile_pic" src="http://i.imgur.com/vNlsRbF.jpg"/>
+            </div>
+           <p>username asked:</p>
+            <h4>What is 2 + 2?</h4>
+            <div>
+                &nbsp;
+                <a class="btn btn-default pull-right">Answer</a>
+            </div>     
+            <br/>       
+            <div class="answer_section">
+                <ul class="list-unstyled">
+                    <li class="answer">
+                        <div class="pull-right">
+                            <a class="vote">^</a>
+                            <br/>
+                            <label>0</label>
+                            <br/>
+                            <a class="vote">v</a>
+                        </div>
+                        <div class="profile pull-left">
+                            <img class="profile_pic" src="http://cdn.theatlantic.com/assets/media/img/mt/2016/01/superman/lead_960.jpg?1454104448"/>
+                        </div>
+                        <p>username said:</p>
+                        <h5>4</h5>
+                    </li>
+                    <li class="answer">
+                        <div class="pull-right">
+                            <a class="vote">^</a>
+                            <br/>
+                            <label>0</label>
+                            <br/>
+                            <a class="vote">v</a>
+                        </div>
+                        <div class="profile pull-left">
+                            <img class="profile_pic" src="http://cdn.theatlantic.com/assets/media/img/mt/2016/01/superman/lead_960.jpg?1454104448"/>
+                        </div>
+                        <p>username said:</p>
+                        <h5>4</h5>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="english container question">
+            <div class="profile pull-left">
+                <img class="profile_pic" src="http://i.imgur.com/vNlsRbF.jpg"/>
+            </div>
+           <p>username asked:</p>
+            <h4>Who was Shakespeare?</h4>
+            <div>
+                &nbsp;
+                <a class="btn btn-default pull-right">Answer</a>
+            </div>     
+            <br/>       
+            <div class="answer_section">
+                <ul class="list-unstyled">
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+    $("#search_button").click(function(){
+        if($("#category_search").val() == "View All"){
+            $(".question").css("display", "block");
+        }else{
+             $(".question").css("display", "none");
+            $("." + $("#category_search").val().toLowerCase()).css("display","block");
+        }
+    });
+</script>
+</body>
+
+</html>
