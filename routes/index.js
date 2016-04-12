@@ -18,3 +18,4 @@ exports.home = function(req, res){
     var data = {data: []};
     res.render("test", data);
 }
+

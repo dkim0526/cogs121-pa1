@@ -168,6 +168,9 @@ io.use(function(socket, next) {
 });
 
 /* TODO: Server-side Socket.io here */
+app.get("/", function(req,res){
+	res.send('<h1>Hello</h1>');
+});
 
 // Start Server
 http.createServer(app).listen(app.get("port"), function() {
