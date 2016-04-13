@@ -27,9 +27,19 @@ exports.home = function(req, res){
                 for(var j = messages[i].answers.length - 1; j >= 0; j--){
                     array[counter] = messages[i].answers[j];
                     counter++;
+                    if(j == 0){
+                        messages[i].answers = array;
+                    }
                 }
                 counter = 0; 
             }
+            counter = 0;
+            var array2 = new Array(messages.length);
+            for(var i = messages.length-1; i >= 0 ; i--){
+                array2[counter] = messages[i];
+                counter++;
+            }    
+            messages = array2;
             res.render('test', {questions: messages});
         }
     }

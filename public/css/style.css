@@ -67,7 +67,7 @@ nav{
 }
 
 .question, .answer{
-	padding:20px;
+	padding:40px;
 }
 
 .question{
@@ -92,4 +92,18 @@ nav{
 	color: #6CCED9;
 	border-radius:15px;
 	padding:5px 20px;
+	background-color: white
 }
+
+.answer_textarea{
+	width: 80%;
+}
+
+.vote_up, .vote_down{
+	background-color: rgb(108, 206, 217)
+}
+
+form#vote_up_form.input_answer{
+	margin-top: -40%
+}
+
