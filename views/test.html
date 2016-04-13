@@ -68,7 +68,7 @@
                 <h4>{{question}}</h4>
                 <div>
                     <form class="input_answer" id="answer_form" method="post" action="/answer">
-                        <input type="hidden" value="{{username}}" name="username"/>
+                        <input type="hidden" value="{{author}}" name="author"/>
                         <input type="hidden" value="{{picture}}" name="picture"/>
                         <input value="{{id}}" name="questionid" type="hidden"/>
                         <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
@@ -80,7 +80,7 @@
 
                 <div class="answer_section">
                     <ul class="list-unstyled">
-                    {{#each answers}}
+                    {{#each this.answers}}
                         <li class="answer">
                             <div class="pull-right">
                                 <form class="input_answer" id="vote_up_form" method="post" action="/vote">
@@ -97,7 +97,7 @@
                                 <img class="profile_pic" src="{{image}}"/>
                             </div>
                             <p>{{username}} said:</p>
-                            <h5>4</h5>
+                            <h5>{{answer}}</h5>
                         </li>
                     {{else}}No answers yet.
                     {{/each}}

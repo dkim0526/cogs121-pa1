@@ -17,14 +17,18 @@ exports.view = function(req, res) {
 
 exports.home = function(req, res){
     models.Question.find().exec(renderData);
-    
     function renderData(err, messages){
         if(err){
             console.log(err)
         }else{
-            console.log(messages);
-            for(var i = 0; i < messages.length; i++){
-                console.log(messages[i]);
+            var counter = 0;
+            var array = new Array(messages.length);
+            for(var i = 0; i < messages.length-1; i++){
+                for(var j = messages[i].answers.length - 1; j >= 0; j--){
+                    array[counter] = messages[i].answers[j];
+                    counter++;
+                }
+                counter = 0; 
             }
             res.render('test', {questions: messages});
         }
@@ -45,7 +49,7 @@ exports.send = function(req, res) {
         throw err;
             console.log(err);
         }else{
-            console.log(new_message);
+            //console.log(new_message);
             res.redirect("/home");
         }
     });
@@ -71,7 +75,7 @@ exports.answer = function(req, res) {
                     throw err;
                     console.log(err);
                 }else{
-                    console.log(question);
+                    //console.log(question);
                     res.redirect("/home");
                 }
             });
@@ -93,7 +97,7 @@ exports.vote = function(req, res){
                     throw err;
                     console.log(err);
                 }else{
-                    console.log(answer);
+                    //console.log(answer);
                     res.redirect("/home");
                 }
             });
