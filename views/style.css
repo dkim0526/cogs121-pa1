@@ -61,7 +61,7 @@ nav{
 }
 
 .answer{
-	background-color:#EEEEEE;
+	background-color: #EEEEEE;
 	margin-top:10px;
 }
 
@@ -78,3 +78,7 @@ nav{
 	border-radius:15px;
 	padding:5px 20px;
 }
+
+a#search_button.btn.btn-default{
+	background-color: red !important;
+	}

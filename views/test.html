@@ -18,7 +18,7 @@
 
 <body>
     <nav>
-        <img src="/img/logo.png" width="200px" style="margin-left:40%">
+        <img src="/img/logowname.png" width="200px" style="margin-left:40%">
         <a href="/" class="pull-right btn" id="logout"><p style="font-size:19px">Logout</p></a>
     </nav>
     <div class="wrapper">
@@ -40,7 +40,7 @@
                     <option>English</option>
                     <option>Other</option>
                 </select>
-                <input type="submit" class="btn btn-custom pull-right" value="Post">
+                <input style="background-color: white" type="submit" class="btn btn-custom pull-right" value="Post">
             </div>
         </form>
 
@@ -71,8 +71,8 @@
                         <input type="hidden" value="{{username}}" name="username"/>
                         <input type="hidden" value="{{picture}}" name="picture"/>
                         <input value="{{id}}" name="questionid" type="hidden"/>
-                        <textarea class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
-                        <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
+                        <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
+                        <input style="background-color:white" type="submit" class="btn btn-custom pull-right" value="Answer"/>
                     </form>    
                    
                 </div>     
@@ -84,13 +84,13 @@
                         <li class="answer">
                             <div class="pull-right">
                                 <form class="input_answer" id="vote_up_form" method="post" action="/vote">
-                                    <button type="submit" class="btn vote vote_up" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
+                                    <button style="background-color: rgb(108, 206, 217);" type="submit" class="btn vote vote_up" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
                                     <br/>
                                     <label>{{votes}}</label>
                                     <input type="hidden" id="vote_{{id}}" value="{{votes}}" name="vote">
                                     <input type="hidden" value="{{id}}" name="answerid" form="vote_up_form">
                                     <br/>
-                                    <button class="btn vote vote_down" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+                                    <button style="background-color: rgb(108,206,217)" class="btn vote vote_down" id="up_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                             <div class="profile pull-left">
