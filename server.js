@@ -27,7 +27,8 @@ var models = require("./models");
 var db = mongoose.connection;
 
 var router = {
-	index: require("./routes/index")
+	index: require("./routes/index"),
+  user: require("./routes/user")
  };
 
 var parser = {
@@ -85,25 +86,31 @@ app.use(session_middleware);
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender']
   },
-  function(accessToken, refreshToken, profile, done) {
-    models.User.findOne({ facebookId: profile.id }, function (err, user) {
+  function(accessToken, refreshToken, res, profile, done) {
+    models.user.findOne({ facebookId: profile.id }, function (err, user) {
       if(err)
         return done(err);
       if(!user){
-        var newUser = new models.User({
+        var newUser = new models.user({
           facebookID: profile.id,
           token: accessToken,
           username: profile.givenName + " " + profile.middleName + " " + profile.familyName,
+          picture: profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg',
           displayName: profile.displayName,
           //is photo profile.value??
-          photo: profile.value
+          //photo: profile.value
         });
+        console.log("newUser is " + newUser);
+
         newUser.save(function(err){
           if(err)
             return handleError(err);
         });
+
+
         return done(null, profile);
       } else{
         user.facebookID = profile.id;
@@ -111,7 +118,18 @@ passport.use(new FacebookStrategy({
         //is token accessToken or refreshToken?? Do I need to update username??
         user.token = accessToken;
         user.username = profile.givenName + " " + profile.middleName + " " + profile.familyName;
-        user.photo = profile.value;
+        user.picture = profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg';
+        // user.photo = profile.value;
+        res.render('test.ejs',
+          {
+            facebookID: user.facebookID,
+            displayName: user.displayName,
+            token: user.token,
+            username: user.username,
+            picture: user.picture
+
+          });
+        console("USER IS " + user);
         user.save();
         process.nextTick(function(){
           return done(null, user);
@@ -120,6 +138,8 @@ passport.use(new FacebookStrategy({
     });
   }
 ));
+   
+
 
 
 //app.get('/auth/facebook',passport.authenticate('facebook'));
@@ -152,12 +172,15 @@ app.get("/logout", function(req, res){
   res.redirect("/");
 });
 
-app.get("/home", router.index.home);
+//app.get("/home", router.index.home);
 app.post("/message", router.index.send);
 app.post("/answer", router.index.answer);
 app.post("/vote", router.index.vote);
 // POST method route
 //app.post("/message", router.email.send);
+app.get("/home", router.user.send);
+// POST method route
+app.post("/home", router.user.send);
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);

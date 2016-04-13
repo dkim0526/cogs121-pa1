@@ -6,7 +6,7 @@ var userSchema = new Schema({
     token: String,
     username: String,
     displayName: String,
-    photo: String
+    picture: String
 });
 var answerSchema = new Schema({
 	author:String,
@@ -24,6 +24,6 @@ var questionSchema = new Schema({
 	category:String
 });
 
-module.exports.User = mongoose.model('User', userSchema);
+module.exports.user = mongoose.model('user', userSchema);
 module.exports.Answer = mongoose.model('Answer', answerSchema);
 module.exports.Question = mongoose.model('Question', questionSchema);

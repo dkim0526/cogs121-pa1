@@ -28,7 +28,7 @@
             <input type="hidden" value="{{username}}" name="username"/>
             <input type="hidden" value="{{picture}}" name="picture"/>
             <div class="profile pull-left">
-                <img src="http://i.imgur.com/vNlsRbF.jpg" class="profile_pic"/>
+                <img src="{{users.0.picture}}" class="profile_pic"/>
             </div>
             
             <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form"></textarea>
@@ -66,7 +66,7 @@
                 <div class="profile pull-left">
                     <img class="profile_pic" src="{{image}}"/>
                 </div>
-               <p>{{username}} asked:</p>
+               <p>{{users.0.displayName}} asked:</p>
                 <h4>{{question}}</h4>
                 <div>
                     <form class="input_answer" id="answer_form" method="post" action="/answer">
