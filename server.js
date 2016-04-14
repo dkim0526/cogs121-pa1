@@ -120,17 +120,6 @@ passport.use(new FacebookStrategy({
         user.username = profile.givenName + " " + profile.middleName + " " + profile.familyName;
         user.picture = profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg';
         // user.photo = profile.value;
-        res.render('test.ejs',
-          {
-            facebookID: user.facebookID,
-            displayName: user.displayName,
-            token: user.token,
-            username: user.username,
-            picture: user.picture
-
-          });
-        console("USER IS " + user);
-        user.save();
         process.nextTick(function(){
           return done(null, user);
         });
