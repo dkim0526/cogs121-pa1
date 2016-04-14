@@ -90,7 +90,7 @@ passport.use(new FacebookStrategy({
     profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender']
   },
   function(accessToken, refreshToken, res, profile, done) {
-    models.user.findOne({ facebookId: profile.id }, function (err, user) {
+    models.user.findOne({ facebookID: profile.id }, function (err, user) {
       if(err)
         return done(err);
       if(!user){
