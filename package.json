@@ -22,7 +22,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "start /b mongod --dbpath dbpath --logpath log/mongod.log",
+    "prestart": "mongod --dbpath dbpath --logpath log/mongod.log&",
     "start": "node server.js"
   },
   "repository": {
