@@ -88,7 +88,7 @@ passport.use(new FacebookStrategy({
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "http://cogs121-pa1.herokuapp.com/auth/facebook/callback",
     profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
-    auth_type: "reauthenticate"
+    auth_type: "requthenticate"
 
   },
   function(accessToken, refreshToken, res, profile, done) {
