@@ -158,7 +158,7 @@ app.get('/auth/facebook/callback',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
   req.logOut();
-  //req.session.destroy();
+  req.session.destroy();
   res.redirect("/");
 });
 app.get("/home", router.user.send);
