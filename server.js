@@ -171,14 +171,14 @@ app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
 });
-
+app.get("/home", router.user.send);
 //app.get("/home", router.index.home);
 app.post("/message", router.index.send);
 app.post("/answer", router.index.answer);
 app.post("/vote", router.index.vote);
 // POST method route
 //app.post("/message", router.email.send);
-app.get("/home", router.user.send);
+
 // POST method route
 app.post("/home", router.user.send);
 
