@@ -10,6 +10,8 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "method-override": "^2.3.5",
+    "mongo": "^0.1.0",
+    "mongoose": "^4.4.12",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
     "passport-twitter": "^1.0.4",
