@@ -1,13 +1,24 @@
 # cogs121-sp16-ass1
 
-[ TEAM: DISTRIBUTION OF WORK ] 
-Chau Lucky Nguyen: Set up the front end of the Login and Home pages and compiled the README. 
+TEAM: DISTRIBUTION OF WORK
+==========================
+Chau Lucky Nguyen: Set up the front end of the Login and Home pages and compiled the README.  
+
 Daniel Beumjoo Kim:
+
+
 Jordan Yoshihara:
+
+
 Steven Lim:
+
+
 Zhixing Meng:
 
-[ NIELSEN'S HEURISTICS ]
+
+NIELSEN'S HEURISTICS 
+====================
+
 1. Visibility of System Status: 
 Social Studying meets this heuristic because the site successfully informs the users exactly where they or the system is currently at, specifically the user's questions and answers are seen instantly when posted, the users are informed when they are logging in with Facebook and redirecting back to the main site, and the numbers on the voting system are immediately updated to notify the users that they just up- or down-voted.
 
