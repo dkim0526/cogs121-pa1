@@ -168,8 +168,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/home',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
-  req.logout();
-  req.session.destroy();
+  req.logOut();
+  //req.session.destroy();
   res.redirect("/");
 });
 app.get("/home", router.user.send);
