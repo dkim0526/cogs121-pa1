@@ -41,7 +41,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 // Database Connection
 var db = mongoose.connection;
-mongoose.connect('mongodb://127.0.0.1/cogs121' || process.env.MONGOLAB_URI );
+mongoose.connect('mongodb://heroku_95gbj5gq:5lfeviehbkv8b7agutk0i62u9p@ds023570.mlab.com:23570/heroku_95gbj5gq' || process.env.MONGOLAB_URI );
 db.on('error', console.error.bind(console, 'Mongo DB Connection Error:'));
 db.once('open', function(callback) {
     console.log("Database connected successfully.");
