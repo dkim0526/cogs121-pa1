@@ -41,7 +41,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 // Database Connection
 var db = mongoose.connection;
-mongoose.connect('mongodb://127.0.0.1/cogs121' || process.env.MONGOLAB_URI );
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://127.0.0.1/cogs121' );
 db.on('error', console.error.bind(console, 'Mongo DB Connection Error:'));
 db.once('open', function(callback) {
     console.log("Database connected successfully.");
@@ -86,11 +86,13 @@ app.use(session_middleware);
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
-    profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender']
+    callbackURL: "http://cogs121-pa1.herokuapp.com/auth/facebook/callback",
+    profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
+    auth_type: "reauthenticate"
+
   },
   function(accessToken, refreshToken, res, profile, done) {
-    models.user.findOne({ facebookId: profile.id }, function (err, user) {
+    models.user.findOne({ facebookID: profile.id }, function (err, user) {
       if(err)
         return done(err);
       if(!user){
@@ -120,17 +122,6 @@ passport.use(new FacebookStrategy({
         user.username = profile.givenName + " " + profile.middleName + " " + profile.familyName;
         user.picture = profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg';
         // user.photo = profile.value;
-        res.render('test.ejs',
-          {
-            facebookID: user.facebookID,
-            displayName: user.displayName,
-            token: user.token,
-            username: user.username,
-            picture: user.picture
-
-          });
-        console("USER IS " + user);
-        user.save();
         process.nextTick(function(){
           return done(null, user);
         });
@@ -168,7 +159,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/home',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
-  req.logout();
+  //req.logOut();
+  req.session.destroy();
   res.redirect("/");
 });
 app.get("/home", router.user.send);
