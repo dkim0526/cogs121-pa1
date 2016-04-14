@@ -87,7 +87,9 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: "http://cogs121-pa1.herokuapp.com/auth/facebook/callback",
-    profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender']
+    profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
+    auth_type: "reauthenticate"
+
   },
   function(accessToken, refreshToken, res, profile, done) {
     models.user.findOne({ facebookID: profile.id }, function (err, user) {
@@ -157,7 +159,7 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/home',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
-  req.logOut();
+  //req.logOut();
   req.session.destroy();
   res.redirect("/");
 });
