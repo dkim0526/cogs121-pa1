@@ -15,35 +15,12 @@ exports.view = function(req, res) {
 
 };
 
-exports.home = function(req, res){
-    models.Question.find().exec(renderData);
-    function renderData(err, messages){
-        if(err){
-            console.log(err)
-        }else{
-            var counter = 0;
-            var array = new Array(messages.length);
-            for(var i = 0; i < messages.length-1; i++){
-                for(var j = messages[i].answers.length - 1; j >= 0; j--){
-                    array[counter] = messages[i].answers[j];
-                    counter++;
-                    if(j == 0){
-                        messages[i].answers = array;
-                    }
-                }
-                counter = 0; 
-            }
-            counter = 0;
-            var array2 = new Array(messages.length);
-            for(var i = messages.length-1; i >= 0 ; i--){
-                array2[counter] = messages[i];
-                counter++;
-            }    
-            messages = array2;
-            res.render('test', {questions: messages});
-        }
-    }
-}
+// exports.home = function(req, res){
+    
+//     function renderData(err, messages){
+
+//     }
+// }
 
 exports.send = function(req, res) {
     var message =  mongoose.model('Question'); //mongoose.model('Message', Message);
@@ -54,6 +31,8 @@ exports.send = function(req, res) {
     new_message.question = req.body.question;
     new_message.category = req.body.category;
     new_message.date = "Today";
+
+    console.log("THIS IS TEST789");
     new_message.save(function(err, saved){
         if(err){
         throw err;
