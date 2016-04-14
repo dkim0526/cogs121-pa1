@@ -4,6 +4,7 @@
   "description": "",
   "main": "models.js",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
     "dotenv": "^2.0.0",
