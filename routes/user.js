@@ -2,20 +2,9 @@ var models = require("../models");
 var mongoose = require('mongoose');
 
 exports.send = function(req, res) {
-  //console.log(req.body); 
-  // help you see what is inside of req.body
-    // your solution here
-  // var user = new models.user({
-  //   facebookID: profile.facebookID,
-  //   displayName: profile.displayName,
-  //   token: profile.token,
-  //   username: profile.username,
-  //   picture: profile.picture 
-  // });
-console.log("TESTING MESSAGE FILE123");
   
-  
-  models.user.find().exec(renderUser);
+  console.log("Passport User Info:   " + req.session.passport.user.picture);
+  models.user.findOne({facebookID: req.session.passport.user.facebookID}, renderUser);
   function renderUser(err, user){
     models.Question.find().exec(renderMessage);
       function renderMessage(err, messages){
@@ -42,15 +31,9 @@ console.log("TESTING MESSAGE FILE123");
                   counter++;
               }    
               messages = array2;
+              //console.log("This is the picture src:    " + user.picture.photos.value);
               res.render("test", {users: user, questions: messages });
           }
         }
-
-        console.log(user);
-        console.log("EHELEJWEOJWOEPJQEPJWEOQPJEPJJW");
-        console.log('picture ', user[0].picture);
   }
-  // user.save((err) => {
-  //   (err) ? res.send(err) : res.redirect('/');
-  // });
 };

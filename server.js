@@ -82,7 +82,7 @@ app.use(session_middleware);
 /* TODO: Passport Middleware Here*/
 
  
-/* TODO: Use Facebook Strategy for Passport here */
+/* TODO: Use Facebook Strategy for Passport here cogs121-pa1.herokuapp.com*/
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -96,24 +96,25 @@ passport.use(new FacebookStrategy({
       if(err)
         return done(err);
       if(!user){
+        console.log("DOES IT GO IN HERE");
         var newUser = new models.user({
           facebookID: profile.id,
           token: accessToken,
           username: profile.givenName + " " + profile.middleName + " " + profile.familyName,
           picture: profile.photos ? profile.photos[0].value : '/img/faces/unknown-user-pic.jpg',
-          displayName: profile.displayName,
+          displayName: profile.displayName
           //is photo profile.value??
           //photo: profile.value
         });
-        console.log("newUser is " + newUser);
-
-        newUser.save(function(err){
+       // console.log("newUser is " + newUser);
+       user = newUser;
+        user.save(function(err){
           if(err)
             return handleError(err);
         });
 
 
-        return done(null, profile);
+        return done(null, user);
       } else{
         user.facebookID = profile.id;
         user.displayName = profile.displayName;
@@ -134,7 +135,7 @@ passport.use(new FacebookStrategy({
 
 
 //app.get('/auth/facebook',passport.authenticate('facebook'));
-console.log("LOOP THRU8");
+//console.log("LOOP THRU8");
 
 /*app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),

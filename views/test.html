@@ -46,10 +46,10 @@
     <div class="wrapper">
     <div class="container input_question" style="text-align:start">
         <form id="question_form" action="/message" method="post">
-            <input type="hidden" value="{{users.0.displayName}}" name="author"/>
-            <input type="hidden" value="{{users.0.picture}}" name="picture"/>
+            <input type="hidden" value="{{users.displayName}}" name="author"/>
+            <input type="hidden" value="{{users.picture}}" name="picture"/>
             <div class="profile pull-left">                
-                <img src="{{users.0.picture}}" class="profile_pic"/>
+                <img src="{{users.picture}}" class="profile_pic"/>
             </div>
             
             <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form" required></textarea>
