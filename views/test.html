@@ -29,10 +29,15 @@
     <nav>
         <a href="/home"><img src="/img/logowname.png" width="250px" style="margin-left:40%"></a>
        
-         <a href="/logout" class="pull-right btn" id="logout" onClick="FB.logout();"><p style="font-size:19px">Logout</p></a>
+         <a href="/logout" class="pull-right btn" id="logout" onClick="FB.logout();">
+             <span class="glyphicon glyphicon-log-out" aria-hidden="true" style="font-size:14pt;" ></span>
+             <p style="font-size:19px">
+                Logout
+            </p>
+        </a>
          <a class="pull-right btn" id="helpToggle">
+            <span class="glyphicon glyphicon-question-sign" style="font-size:14pt;" aria-hidden="true"></span>
             <p style="font-size:19px" data-toggle="modal" data-target="#helpModal">
-                <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                 Help
             </p>
         </a>
