@@ -169,6 +169,7 @@ app.get('/auth/facebook/callback',
                                       failureRedirect: '/login' }));
 app.get("/logout", function(req, res){
   req.logout();
+  req.session.destroy();
   res.redirect("/");
 });
 app.get("/home", router.user.send);
