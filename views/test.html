@@ -35,9 +35,9 @@
                 Logout
             </p>
         </a>
-         <a class="pull-right btn" id="helpToggle">
+         <a class="pull-right btn" id="helpToggle" data-toggle="modal" data-target="#helpModal">
             <span class="glyphicon glyphicon-question-sign" style="font-size:14pt;" aria-hidden="true"></span>
-            <p style="font-size:19px" data-toggle="modal" data-target="#helpModal">
+            <p style="font-size:19px">
                 Help
             </p>
         </a>
@@ -71,7 +71,7 @@
                     <option>Social Science</option>
                     <option>Other</option>
                 </select>
-                <input type="submit" class="btn btn-custom pull-right" value="Post">
+                <input type="submit" class="btn btn-custom pull-right post-question" value="Post">
             </div>
         </form>
 
@@ -107,7 +107,7 @@
                     <img src="{{photo}}" class="profile_pic"/>
                 </div>
                <p style="color:gray;">{{author}} asked:</p>
-                <h4>{{question}}</h4>
+                <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
                 <div>
                     <form class="input_answer" id="answer_form" method="post" action="/answer">
                         <input type="hidden" value="{{author}}" name="author"/>
@@ -154,14 +154,22 @@
                 
 <!-- Modal -->
 <div class="modal fade" id="helpModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width:50vw;">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Social Studying Help</h4>
             </div>
             <div class="modal-body">
-               
+                <h3>Post a question</h3>
+                <br>
+            <img src="/img/question.png" width="100%"/>
+                <h3>Answer questions</h3>
+                <br>
+            <img src="/img/answer.png" width="100%"/>
+                <h3>Up-vote helpful answers and down-vote troll answers</h3>
+                <br>
+            <img src="/img/vote.png" width="100%"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-custom" data-dismiss="modal">Close</button>
@@ -218,8 +226,7 @@
         }
     });
 </script>
-        
-</script>
+
 
 </body>
 

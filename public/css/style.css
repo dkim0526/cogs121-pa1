@@ -183,3 +183,10 @@ form#vote_up_form.input_answer{
 	margin-left:15px;
 	font-size:12pt;
 }
+
+.stylecategory{
+    background-color: #6CCED9;
+    color: black;
+    padding: 4px 11px;
+    border-radius: 10px;
+}
