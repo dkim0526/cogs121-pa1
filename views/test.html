@@ -25,10 +25,11 @@
     <div class="wrapper">
     <div class="container input_question" style="text-align:start">
         <form id="question_form" action="/message" method="post">
-            <input type="hidden" value="{{username}}" name="username"/>
-            <input type="hidden" value="{{picture}}" name="picture"/>
-            <div class="profile pull-left">
+            <input type="hidden" value="{{users.0.displayName}}" name="author"/>
+            <input type="hidden" value="{{users.0.picture}}" name="picture"/>
+            <div class="profile pull-left">                
                 <img src="{{users.0.picture}}" class="profile_pic"/>
+                <div>{{users.0.displayName}}</div>
             </div>
             
             <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form"></textarea>
@@ -64,14 +65,14 @@
         {{#each questions}}    
             <li class="{{subject}} container question">
                 <div class="profile pull-left">
-                    <img class="profile_pic" src="{{image}}"/>
+                    <img src="{{photo}}" class="profile_pic"/>
                 </div>
-               <p>{{users.0.displayName}} asked:</p>
+               <p>{{author}} asked:</p>
                 <h4>{{question}}</h4>
                 <div>
                     <form class="input_answer" id="answer_form" method="post" action="/answer">
                         <input type="hidden" value="{{author}}" name="author"/>
-                        <input type="hidden" value="{{picture}}" name="picture"/>
+                        <input type="hidden" value="{{photo}}" name="photo"/>
                         <input value="{{id}}" name="questionid" type="hidden"/>
                         <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
                         <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
@@ -96,9 +97,9 @@
                                 </form>
                             </div>
                             <div class="profile pull-left">
-                                <img class="profile_pic" src="{{image}}"/>
+                                <img src="{{users.0.picture}}" class="profile_pic"/>
                             </div>
-                            <p>{{username}} said:</p>
+                            <p>{{author}} said:</p>
                             <h5>{{answer}}</h5>
                         </li>
                     {{else}}No answers yet.

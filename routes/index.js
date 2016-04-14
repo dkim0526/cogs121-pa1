@@ -15,24 +15,17 @@ exports.view = function(req, res) {
 
 };
 
-// exports.home = function(req, res){
-    
-//     function renderData(err, messages){
-
-//     }
-// }
 
 exports.send = function(req, res) {
     var message =  mongoose.model('Question'); //mongoose.model('Message', Message);
     var new_message = new message();
-    new_message.author = (req.body.username)? req.body.username: "Anonymous";
+    new_message.author = (req.body.author)? req.body.author: "Anonymous";
     new_message.photo = req.body.picture;
     new_message.answers = [];
     new_message.question = req.body.question;
     new_message.category = req.body.category;
     new_message.date = "Today";
 
-    console.log("THIS IS TEST789");
     new_message.save(function(err, saved){
         if(err){
         throw err;
@@ -53,7 +46,7 @@ exports.answer = function(req, res) {
         }else{
             var answer_schema =  mongoose.model('Answer'); 
             var answer = answer_schema();
-            answer.author = (req.body.username)? req.body.username: "Anonymous";
+            answer.author = (req.body.author)? req.body.author: "Anonymous";
             answer.photo = req.body.picture;
             answer.answer = req.body.answer;
             answer.votes = 0;
