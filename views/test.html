@@ -209,6 +209,17 @@
         $("#vote_" + id).text(Number($("#vote_" + id).text()) - 1);
     });
 </script>
+<script>
+    $("#search_button").click(function(){
+        var keyword = $("#search_input_box").val().split(" ");
+        $(".question").css("display", "none"); 
+        for( var i = 0; i< keyword.length; i++){
+            $(".question:contains("+keyword[i]+")").css("display", "block");
+        }
+    });
+</script>
+        
+</script>
 
 </body>
 

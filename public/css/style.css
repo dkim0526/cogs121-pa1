@@ -80,6 +80,11 @@ nav{
 .answer{
 	background-color:#EEEEEE;
 	margin-top:10px;
+    min-height: 100px;
+}
+
+textarea{
+    resize: none;
 }
 
 #search_area{
