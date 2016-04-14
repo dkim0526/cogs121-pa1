@@ -18,7 +18,8 @@
 
 <body>
     <nav>
-        <img src="/img/logowname.png" width="200px" style="margin-left:40%">
+        <a href="/home"><img src="/img/logowname.png" width="250px" style="margin-left:40%"></a>
+        <a class="pull-right btn" id="helpToggle"><p style="font-size:19px">Help</p></a>
         <a href="/" class="pull-right btn" id="logout"><p style="font-size:19px">Logout</p></a>
     </nav>
 
@@ -31,14 +32,23 @@
                 <img src="{{users.0.picture}}" class="profile_pic"/>
             </div>
             
-            <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form"></textarea>
+            <textarea id="question_textarea" placeholder="Type question here..." name="question" form="question_form" required></textarea>
             <br/>
             <div id="new_question_options">
-                <label for="category_dropdown">Category:</label>
-                <select id="category_dropdown" name="category" form="question_form">
-                    <option>Math</option>
+                <label for="category_dropdown" id="new_question_subject_label">Subject:</label>
+                <select id="category_dropdown" name="category" form="question_form" class="custom-dropdown" required>
+                    <option value="" disabled selected><em>Choose a Subject...</em></option>
+                    <option>Biology</option>
+                    <option>Business</option>
+                    <option>Chemistry</option>
+                    <option>Cognitive Science</option>
                     <option>Computer Science</option>
+                    <option>Economics</option>
+                    <option>Engineering</option>
                     <option>English</option>
+                    <option>Math</option>
+                    <option>Psychology</option>
+                    <option>Social Science</option>
                     <option>Other</option>
                 </select>
                 <input type="submit" class="btn btn-custom pull-right" value="Post">
@@ -49,20 +59,28 @@
 
     <hr/>
     <div id="search_area" class="text-center">
-        <label>Search for:</label>
-        <select id="category_search">
+        <label id="search_label">Search for:</label>
+        <select id="category_search" class="custom-dropdown">
             <option selected>View All</option>
-            <option>Math</option>
+            <option>Biology</option>
+            <option>Business</option>
+            <option>Chemistry</option>
+            <option>Cognitive Science</option>
             <option>Computer Science</option>
+            <option>Economics</option>
+            <option>Engineering</option>
             <option>English</option>
+            <option>Math</option>
+            <option>Psychology</option>
+            <option>Social Science</option>
             <option>Other</option>
         </select>
-        <input placeholder="Enter keywords..."/>
-        <a class="btn btn-default" id="search_button">Search</a>
+        <input placeholder="Enter keywords..." id="search_input_box"/>
+        <a class="btn btn-custom" id="search_button">Search</a>
     </div>
     <ul class="list-unstyled" id="question_section">
         {{#each questions}}    
-            <li class="{{subject}} container question">
+            <li class="{{category}} container question">
                 <div class="profile pull-left">
                     <img class="profile_pic" src="{{image}}"/>
                 </div>
@@ -111,7 +129,33 @@
         {{/each}}
     </ul>
 </div>
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#cardkive">Cardkive</button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="cardkive" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Tastebuddies</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Web application that motivates college students to cook with ingredients they have in their kitchen.</p>
+                                <a href="https://tastebuddies.herokuapp.com/cook" target="_blank">Launch the website!</a>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 <script src="https://code.jquery.com/jquery.js"></script>
+<script>
+  $("#helpToggle").click(function(){
+    $(".modal").modal("toggle");
+  });
+</script>
 <script>
     $("#search_button").click(function(){
         if($("#category_search").val() == "View All"){
