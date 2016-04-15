@@ -48,6 +48,8 @@
         <form id="question_form" action="/message" method="post">
             <input type="hidden" value="{{users.displayName}}" name="author"/>
             <input type="hidden" value="{{users.picture}}" name="picture"/>
+            <input type="hidden" value="{{users.displayName}}" name="author" form="answer_form"/>
+            <input type="hidden" value="{{users.picture}}" name="photo" form="answer_form"/>
             <div class="profile pull-left">                
                 <img src="{{users.picture}}" class="profile_pic"/>
             </div>
@@ -105,13 +107,13 @@
             <li class="{{category}} container question">
                 <div class="profile pull-left profile_question">
                     <img src="{{photo}}" class="profile_pic"/>
+                    <p>{{date}}</p>
                 </div>
                <p style="color:gray;">{{author}} asked:</p>
                 <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
                 <div>
                     <form class="input_answer" id="answer_form" method="post" action="/answer">
-                        <input type="hidden" value="{{author}}" name="author"/>
-                        <input type="hidden" value="{{photo}}" name="photo"/>
+                        
                         <input value="{{id}}" name="questionid" type="hidden"/>
                         <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
                         <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
@@ -132,6 +134,7 @@
                                     <label class="vote_number" id="vote_{{id}}">{{votes}}</label>
                                     <br/>
                                     <button style="margin-top:-20%;" class="btn vote vote_down" id="down_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="downv_{{id}}"></span></button>
+                                    <p>{{date}}</p>
                             </div>
                             <div class="profile pull-left">
                                 <img src="{{photo}}" class="profile_pic"/>

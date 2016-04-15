@@ -13,14 +13,14 @@ var answerSchema = new Schema({
 	photo:String,
 	answer:String,
 	votes:Number,
-	date:String
+	date: String
 });
 var questionSchema = new Schema({
 	author:String,
 	photo:String,
 	question:String,
 	answers:[answerSchema],
-	date:String,
+	date: String,
 	category:String
 });
 

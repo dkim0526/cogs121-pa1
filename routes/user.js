@@ -13,8 +13,9 @@ exports.send = function(req, res) {
               messages = [];
           }else{
               var counter = 0;
-              var array = new Array(messages.length);
-              for(var i = 0; i < messages.length-1; i++){
+              var array; 
+              for(var i = 0; i < messages.length; i++){
+                  array = new Array(messages[i].answers.length);
                   for(var j = messages[i].answers.length - 1; j >= 0; j--){
                       array[counter] = messages[i].answers[j];
                       counter++;
@@ -31,7 +32,7 @@ exports.send = function(req, res) {
                   counter++;
               }    
               messages = array2;
-              //console.log("This is the picture src:    " + user.picture.photos.value);
+              
               res.render("test", {users: user, questions: messages });
           }
         }
