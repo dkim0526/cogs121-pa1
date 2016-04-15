@@ -1,47 +1,28 @@
-<header>
-    <a class="logout" href="/logout">
-        <div class="logout-button">
-            Logout
-        </div>
-    </a>
-    <div class="search">
-        <svg class="search-icon" style="width:24px;height:24px" viewBox="0 0 24 24">
-            <path fill="#4fa6de" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-        </svg>
-        <input class="filtered-search" placeholder="Search username or messages" autocomplete="off" />
-    </div>
-</header>
-<section>
-    <div id="inner">
-        <form id="send_message" action="">
-            <input id="user_input" placeholder="Type a new message and hit enter!" autocomplete="off" />
-        </form>
-        <ul id="messages">
-            {{#each newsfeed}}
-            <hr>
-            <li>
-                <div class="user">
-                    <div class="user-image">
-                        <img src="{{user.photo}}" alt="">
-                    </div>
-                    <div class="user-info">
-                        <span class="username">{{user.username}}</span>
-                        <br/>
-                        <span class="posted">{{posted}}</span>
-                    </div>
-                </div>
-                <div class="message-content">
-                    {{message}}
-                </div>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-</section>
-<footer>
-    &copy; 2016. COGS 121 Spring 2016
-</footer>
-<script src="./js/jquery.min.js"></script>
-<script src="./js/socket.io.min.js"></script>
-<script src="./js/chatbox.js"></script>
-<script src="./js/search.js"></script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Socket.IO Chat Example</title>
+  <link rel="stylesheet" href="/css/chat.css">
+</head>
+<body>
+  <ul class="pages">
+    <li class="chat page">
+      <div class="chatArea">
+        <ul class="messages"></ul>
+      </div>
+      <input class="inputMessage" placeholder="Type here..."/>
+    </li>
+    <li class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+        <input class="usernameInput" type="text" maxlength="14" />
+      </div>
+    </li>
+  </ul>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/js/socket.io.min.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>

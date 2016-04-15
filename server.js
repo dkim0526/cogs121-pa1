@@ -86,7 +86,7 @@ app.use(session_middleware);
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://cogs121-pa1.herokuapp.com/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
     profileFields: ['id', 'name','picture.type(large)', 'emails', 'displayName', 'about', 'gender'],
     auth_type: "requthenticate"
 
@@ -171,6 +171,9 @@ app.post("/answer", router.index.answer);
 app.post("/vote", router.index.vote);
 // POST method route
 //app.post("/message", router.email.send);
+app.get("/chat", function(err, res){
+  res.render("chat");
+});
 
 // POST method route
 app.post("/home", router.user.send);
