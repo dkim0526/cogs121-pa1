@@ -83,19 +83,19 @@
          <div id="search_area" class="text-center">
             <label id="search_label">Search for:</label>
             <select id="category_search" class="custom-dropdown">
-                <option selected>View All</option>
-                <option>Biology</option>
-                <option>Business</option>
-                <option>Chemistry</option>
-                <option>Cognitive Science</option>
-                <option>Computer Science</option>
-                <option>Economics</option>
-                <option>Engineering</option>
-                <option>English</option>
-                <option>Math</option>
-                <option>Psychology</option>
-                <option>Social Science</option>
-                <option>Other</option>
+                <option value="View All" selected>View All</option>
+                <option value="Biology">Biology</option>
+                <option value="Business">Business</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Cognitive Science">Cognitive Science</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Economics">Economics</option>
+                <option value="Engineering">Engineering</option>
+                <option value="English">English</option>
+                <option value="Math">Math</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Social Science">Social Science</option>
+                <option value="Other">Other</option>
             </select>
             <input placeholder="Enter keywords..." id="search_input_box"/>
             <a class="btn btn-custom" id="search_button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
@@ -127,17 +127,17 @@
                     {{#each this.answers}}
                         <li class="answer">
                             <div class="pull-right">
-                                    <button style="margin-top:-40%;" type="submit" class="btn vote vote_up" id="up_{{id}}">
+                                    <button type="submit" class="btn vote vote_up" id="up_{{id}}">
                                         <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="upv_{{id}}"></span>
                                     </button>
                                     <br/>
                                     <label class="vote_number" id="vote_{{id}}">{{votes}}</label>
                                     <br/>
-                                    <button style="margin-top:-20%;" class="btn vote vote_down" id="down_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="downv_{{id}}"></span></button>
-                                    <p>{{date}}</p>
+                                    <button style="margin-top:10px;" class="btn vote vote_down" id="down_{{id}}"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true" id="downv_{{id}}"></span></button>
                             </div>
-                            <div class="profile pull-left">
+                            <div class="profile pull-left text-center">
                                 <img src="{{photo}}" class="profile_pic"/>
+                                <p>{{date}}</p>
                             </div>
                             <p style="color:gray;">{{author}} answered:</p>
                             <h5 class="answer_text">{{answer}}</h5>
@@ -224,9 +224,23 @@
     $("#search_button").click(function(){
         var keyword = $("#search_input_box").val().split(" ");
         $(".question").css("display", "none"); 
-        for( var i = 0; i< keyword.length; i++){
-            $(".question:contains("+keyword[i]+")").css("display", "block");
+
+        if($("#category_search").val() == "View All"){
+            console.log("HOORAY1");
+            for( var i = 0; i< keyword.length; i++){
+                $(".question:contains("+keyword[i]+")").css("display", "block");
+            }
         }
+        else if($("#search_input_box").val().trim() == ""){
+             console.log("HOORAY2");
+            $("." + $("#category_search").val()).css("display","block");
+        }
+        else if($("#category_search").val() != "View All" && $("#search_input_box").val().trim() != ""){
+            console.log("HOORAY3");
+            for( var i = 0; i< keyword.length; i++){
+                $("." + $("#category_search").val() + ".question:contains("+keyword[i]+")").css("display", "block");
+            }
+        }      
     });
 </script>
 

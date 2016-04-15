@@ -20,7 +20,7 @@ NIELSEN'S HEURISTICS
 ====================
 
 1. Visibility of System Status:   
-Social Studying meets this heuristic because the site successfully informs the users exactly where they or the system is currently at, specifically the user's questions and answers are seen instantly when posted, the users are informed when they are logging in with Facebook and redirecting back to the main site, and the numbers on the voting system are immediately updated to notify the users that they just up- or down-voted.
+Social Studying meets this heuristic because the site successfully informs the users exactly where they or the system is currently at, specifically the user's questions and answers are seen instantly when posted, the users are informed when they are logging in with Facebook and redirecting back to the main site, each question and answer have a date stamp, and the numbers on the voting system are immediately updated to notify the users that they just up- or down-voted.
 
 2. Match Between System and the Real World:  
 Social Studying meets this heuristic because the site matches real world conventions, such as the 'Question Mark' icon, which directs the users to the Help page when the user needs assistance. 

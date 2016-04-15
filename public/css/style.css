@@ -80,7 +80,7 @@ nav{
 .answer{
 	background-color:#EEEEEE;
 	margin-top:10px;
-    min-height: 100px;
+    min-height: 200px;
 }
 
 textarea{
@@ -151,10 +151,6 @@ textarea{
 	background-color: rgb(108, 206, 217)
 }
 
-form#vote_up_form.input_answer{
-	margin-top: -40%
-}
-
 .profile_question{
 	height:100%;
 }
@@ -181,7 +177,8 @@ form#vote_up_form.input_answer{
 
 .vote_number{
 	margin-left:15px;
-	font-size:12pt;
+	font-size:15pt;
+    margin-top: 20px;
 }
 
 .stylecategory{
