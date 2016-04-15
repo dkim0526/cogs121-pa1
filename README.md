@@ -4,16 +4,14 @@ TEAM: DISTRIBUTION OF WORK
 ==========================
 Chau Lucky Nguyen: Set up the front end of the Login and Home pages and compiled the README.  
 
-Daniel Beumjoo Kim:
+Daniel Beumjoo Kim: Set up basic structure of the project by creating repository, installing node modules and adding passport.js and worked on rendering data from Facebook. Worked on routes and passing data into view. Deploed changd commits on heroku and added socket.io.  
+
+Jordan Yoshihara: Created html and css files for main sreen, added handlears into main screen, helped create models and write functions for them, and helped implement search functions.  
+
+Steven Lim: 
 
 
-Jordan Yoshihara:
-
-
-Steven Lim:
-
-
-Zhixing Meng:
+Zhixing Meng: Used passport.js to build Facebook login. Worked on getting extra fields (Facebook profile picture) from Facebook and rendering it on the frontend. Set up the route for logout and worked on removing the session when user logs out. Created the error list to keep track of the errors we have. 
 
 
 NIELSEN'S HEURISTICS 
@@ -41,7 +39,7 @@ The site utilizes common icons on buttons that allows users to predict the funct
 Users are allowed to quickly search for specific questions by inputting keywords, which can speed up the task of looking for answers for questions you have. 
 
 8. Aesthetic and Minimalist Design:   
-The action of posting and answer questions are all located on the same page, which reduces the amount of clicks and showcases the relevant units of information, and a prominent gray search bar was included to not only separate posting and answering questions, it also allows the users to focus to the bar quickly when they want to find something. 
+The action of posting and answer questions are all located on the same page, which reduces the amount of clicks and showcases the relevant units of information, and a prominent gray search bar was included to not only separate posting and answering questions, it also allows the users to focus to the bar quickly when they want to find something. We added the ability to collapse answers to minimize the amount of scrolling.
 
 9. Help Users Recognize, Diagnose, and Recover from Errors:  
 When error messages do pop up on our site, the solution to the problem is clear enough for the users to understand. 

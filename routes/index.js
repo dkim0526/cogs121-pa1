@@ -58,15 +58,8 @@ exports.answer = function(req, res) {
             var answer = answer_schema();
             answer.author = (req.body.author)? req.body.author: "Anonymous";
             answer.photo = req.body.photo;
-            var temp = 0;
-            for(var i = 0; i < answer.length; i++){
-                if(typeof(answer[i]) != ''){
-                    temp = i;
-                    break;
-                }
-            }
-            answer.answer = req.body.answer[temp];
-            console.log(req.body.answer);
+
+            answer.answer = req.body.answer;
             answer.votes = 0;
             answer.date = date;
             question.answers.addToSet(answer);
