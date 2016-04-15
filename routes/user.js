@@ -20,7 +20,7 @@ exports.send = function(req, res) {
                       array[counter] = messages[i].answers[j];
                       counter++;
                       if(j == 0){
-                          messages[i].answers = array;
+                          messages[i].answers = array.slice();
                       }
                   }
                   counter = 0; 
@@ -31,7 +31,7 @@ exports.send = function(req, res) {
                   array2[counter] = messages[i];
                   counter++;
               }    
-              messages = array2;
+              messages = array2.slice();
               
               res.render("test", {users: user, questions: messages });
           }

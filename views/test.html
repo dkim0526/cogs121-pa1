@@ -54,8 +54,6 @@
         <form id="question_form" action="/message" method="post">
             <input type="hidden" value="{{users.displayName}}" name="author"/>
             <input type="hidden" value="{{users.picture}}" name="picture"/>
-            <input type="hidden" value="{{users.displayName}}" name="author" form="answer_form"/>
-            <input type="hidden" value="{{users.picture}}" name="photo" form="answer_form"/>
             <div class="profile pull-left">                
                 <img src="{{users.picture}}" class="profile_pic"/>
             </div>
@@ -111,24 +109,26 @@
     <ul class="list-unstyled" id="question_section">
         {{#each questions}}    
             <li class="{{category}} container question">
-                <div class="profile pull-left profile_question">
+                <div class="profile pull-left profile_question text-center">
                     <img src="{{photo}}" class="profile_pic"/>
-                    <p>{{date}}</p>
+                    <p><em>{{date}}</em></p>
                 </div>
                <p style="color:gray;">{{author}} asked:</p>
                 <h4><span class="stylecategory">{{category}}</span> {{question}}</h4>
                 <div>
-                    <form class="input_answer" id="answer_form" method="post" action="/answer">
+                    <form class="input_answer" id="answer_form_{{id}}" method="post" action="/answer">
                         
                         <input value="{{id}}" name="questionid" type="hidden"/>
-                        <textarea style="width:80%" class="answer_textarea" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
+                        <input type="hidden" value="{{../users.displayName}}" name="author" form="answer_form_{{id}}"/>
+                        <input type="hidden" value="{{../users.picture}}" name="photo" form="answer_form_{{id}}"/>
+                        <textarea style="width:80%" class="answer_textarea" form="answer_form_{{id}}" placeholder="Type answer here..." name="answer" form="answer_form"></textarea>
                         <input type="submit" class="btn btn-custom pull-right" value="Answer"/>
                     </form>    
                    
                 </div>     
                 <br/>  
-
-                <div class="answer_section">
+                <a class="expand btn" id="expand_{{id}}"><span class="glyphicon glyphicon-chevron-up" id="togexpand_{{id}}"></span>&nbsp;Show Answers</a>
+                <div class="answer_section" id="answers_{{id}}">
                     <ul class="list-unstyled">
                     {{#each this.answers}}
                         <li class="answer">
@@ -143,7 +143,7 @@
                             </div>
                             <div class="profile pull-left text-center">
                                 <img src="{{photo}}" class="profile_pic"/>
-                                <p>{{date}}</p>
+                                <p><em>{{date}}</em></p>
                             </div>
                             <p style="color:gray;">{{author}} answered:</p>
                             <h5 class="answer_text">{{answer}}</h5>
@@ -195,6 +195,18 @@
         }else{
              $(".question").css("display", "none");
             $("." + $("#category_search").val().toLowerCase()).css("display","block");
+        }
+    });
+    
+    $(".expand").click(function(event){
+        var id = event.target.id.split("_")[1];
+        if($("#" + event.target.id).text().trim() == "Show Answers"){
+            $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-down' id='togexpand_'" + id + "'></span>&nbsp;Hide Answers");
+            $("#answers_" + id).slideDown(); 
+        }
+        else{
+            $("#" + event.target.id).html("<span class='glyphicon glyphicon-chevron-up' id='togexpand_'" + id + "'></span>&nbsp;Show Answers");
+            $("#answers_" + id).slideUp(); 
         }
     });
 </script>
