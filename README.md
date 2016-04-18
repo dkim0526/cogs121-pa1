@@ -8,8 +8,7 @@ Daniel Beumjoo Kim: Set up basic structure of the project by creating repository
 
 Jordan Yoshihara: Created html and css files for main sreen, added handlears into main screen, helped create models and write functions for them, and helped implement search functions.  
 
-Steven Lim: 
-
+Steven Lim: Worked on implementing routing and getting user information (such as posts, facebook id, profile picture, etc) passed along different views. Also helped design schemas that were used in our database. 
 
 Zhixing Meng: Used passport.js to build Facebook login. Worked on getting extra fields (Facebook profile picture) from Facebook and rendering it on the frontend. Set up the route for logout and worked on removing the session when user logs out. Created the error list to keep track of the errors we have. 
 
